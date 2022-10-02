@@ -223,6 +223,10 @@ RegisterNetEvent('lockpicks:UseLockpick', function(isAdvanced)
     LockpickDoor(isAdvanced)
 end)
 
+AddEventHandler('qb-vehiclekeys:client:setLastPickedVehicle', function(vehicle)
+    lastPickedVehicle = vehicle
+end)
+
 
 -- Backwards Compatibility ONLY -- Remove at some point --
 RegisterNetEvent('vehiclekeys:client:SetOwner', function(plate)
@@ -394,9 +398,20 @@ function LockpickDoor(isAdvanced)
     if #(pos - GetEntityCoords(vehicle)) > 2.5 then return end
     if GetVehicleDoorLockStatus(vehicle) <= 0 then return end
 
+    local boostingInfo = Entity(vehicle).state.boostingData
+    if boostingInfo ~= nil and boostingInfo.cid ~= QBCore.Functions.GetPlayerData().citizenid then
+        QBCore.Functions.Notify('This vehicle is not meant for you!', 'error')
+        return
+    end
+
+    if boostingInfo ~= nil and boostingInfo.advancedSystem then
+        QBCore.Functions.Notify('This vehicle requires more advanced systems!', 'error')
+        return
+    end
+
     usingAdvanced = isAdvanced
-    Config.LockPickDoorEvent()
-end
+    TriggerEvent('qb-lockpick:client:openLockpick', lockpickFinish)
+end 
 
 function LockpickFinishCallback(success)
     local vehicle = QBCore.Functions.GetClosestVehicle()
