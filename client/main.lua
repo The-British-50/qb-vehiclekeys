@@ -223,6 +223,10 @@ RegisterNetEvent('lockpicks:UseLockpick', function(isAdvanced)
     LockpickDoor(isAdvanced)
 end)
 
+AddEventHandler('qb-vehiclekeys:client:setLastPickedVehicle', function(vehicle)
+    lastPickedVehicle = vehicle
+end)
+
 
 -- Backwards Compatibility ONLY -- Remove at some point --
 RegisterNetEvent('vehiclekeys:client:SetOwner', function(plate)
