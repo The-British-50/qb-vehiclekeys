@@ -398,20 +398,9 @@ function LockpickDoor(isAdvanced)
     if #(pos - GetEntityCoords(vehicle)) > 2.5 then return end
     if GetVehicleDoorLockStatus(vehicle) <= 0 then return end
 
-    local boostingInfo = Entity(vehicle).state.boostingData
-    if boostingInfo ~= nil and boostingInfo.cid ~= QBCore.Functions.GetPlayerData().citizenid then
-        QBCore.Functions.Notify('This vehicle is not meant for you!', 'error')
-        return
-    end
-
-    if boostingInfo ~= nil and boostingInfo.advancedSystem then
-        QBCore.Functions.Notify('This vehicle requires more advanced systems!', 'error')
-        return
-    end
-
     usingAdvanced = isAdvanced
-    TriggerEvent('qb-lockpick:client:openLockpick', lockpickFinish)
-end 
+    Config.LockPickDoorEvent()
+end
 
 function LockpickFinishCallback(success)
     local vehicle = QBCore.Functions.GetClosestVehicle()
