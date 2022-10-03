@@ -42,10 +42,26 @@ Config.PoliceNightAlertChance = 0.50 -- Chance of alerting police at night (time
 -- Job Settings
 Config.SharedKeys = { -- Share keys amongst employees. Employees can lock/unlock any job-listed vehicle
     ['police'] = { -- Job name
-        requireOnduty = false,
+        requireOnduty = true,
         vehicles = {
-	    'police', -- Vehicle model
-	    'police2', -- Vehicle model
+        'BX64FTP',
+        'BX65DZC',
+        'area7',
+        'cid4',
+        'abtp1',
+        'abtp2',
+        'abtp3',
+        'abtp4',
+        'abtp5',
+        'GX18',
+        'cid1',
+        'GX14',
+        'cid5',
+        'cid3',
+        'ARV4',
+        'ARV5',
+        'RJ71AJV',
+        'BX21AWM',
 	}
     },
 
