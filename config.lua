@@ -44,8 +44,6 @@ Config.SharedKeys = { -- Share keys amongst employees. Employees can lock/unlock
     ['police'] = { -- Job name
         requireOnduty = true,
         vehicles = {
-        'BX64FTP',
-        'BX65DZC',
         'area7',
         'cid4',
         'abtp1',
@@ -61,7 +59,9 @@ Config.SharedKeys = { -- Share keys amongst employees. Employees can lock/unlock
         'ARV4',
         'ARV5',
         'RJ71AJV',
-        'BX21AWM',
+        'policetrans',
+        'csitransit',
+        'rpug31',
 	}
     },
 
