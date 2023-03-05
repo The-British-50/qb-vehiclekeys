@@ -431,6 +431,18 @@ end
 function LockpickFinishCallback(success)
     local vehicle = QBCore.Functions.GetClosestVehicle()
 
+    if GetPedInVehicleSeat(vehicle, -1) == PlayerPedId() then
+        TriggerServerEvent('evidence:server:SetIgnitionTamper', true, QBCore.Functions.GetPlate(vehicle))
+        if QBCore.Functions.IsWearingGloves and not QBCore.Functions.IsWearingGloves() then
+            TriggerServerEvent('evidence:server:CreateCarFingerprint', QBCore.Functions.GetPlate(vehicle), "Vehicle Ignition")
+        end
+    else
+        if QBCore.Functions.IsWearingGloves and not QBCore.Functions.IsWearingGloves() then
+            TriggerServerEvent('evidence:server:CreateCarFingerprint', QBCore.Functions.GetPlate(vehicle), "Exterior Locks")
+        end
+        TriggerServerEvent('evidence:server:SetExteriorTamper', true, QBCore.Functions.GetPlate(vehicle))
+    end
+
     local chance = math.random()
     if success then
         TriggerServerEvent('hud:server:GainStress', math.random(1, 4))
