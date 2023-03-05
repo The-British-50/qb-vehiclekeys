@@ -59,6 +59,7 @@ CreateThread(function()
                     else
                         TriggerServerEvent('qb-vehiclekeys:server:setVehLockState', NetworkGetNetworkIdFromEntity(entering), 1)
                         TriggerServerEvent('qb-vehiclekeys:server:AcquireVehicleKeys', plate)
+                        TriggerServerEvent('ak4y-battlepass:taskCountAdd:standart', 4, 1)
 
                         --Make passengers flee
                         local pedsInVehicle = GetPedsInVehicle(entering)
@@ -159,6 +160,11 @@ AddEventHandler('onResourceStart', function(resourceName)
         GetKeys()
     end
 end)
+
+-- Enables officers to gain entry to player vehicles
+RegisterNetEvent('qb-vehiclekeys:client:UpdateLastPicked', function(entity)
+    lastPickedVehicle = entity
+end) 
 
 -- Handles state right when the player selects their character and location.
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
@@ -538,6 +544,7 @@ function CarjackVehicle(target)
                 end
                 TriggerServerEvent('hud:server:GainStress', math.random(1, 4))
                 TriggerServerEvent('qb-vehiclekeys:server:AcquireVehicleKeys', plate)
+                TriggerServerEvent('ak4y-battlepass:taskCountAdd:standart', 4, 1)
             else
                 QBCore.Functions.Notify(Lang:t("notify.cjackfail"), "error")
                 MakePedFlee(target)
